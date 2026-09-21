@@ -1,0 +1,12 @@
+﻿20:23:55        | - signature verified [v2, v3]
+20:23:55        | Subject: CN=Android Debug, OU=Android, O=US, L=US, ST=US, C=US
+20:23:55        | SHA256: 1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953 / SHA256withRSA
+20:23:55        | Expires: Fri Mar 11 04:10:05 CST 2044
+20:23:55        | [Thu Sep 17 20:23:55 CST 2026][v1.3.0]
+20:23:55        | Successfully processed 1 APKs and 0 errors in 0.62 seconds.
+20:23:55  
+20:23:55  ======================================================================
+20:23:55  缁撴灉
+20:23:55  ======================================================================
+20:23:55    [OK] aligned-aligned-debugSigned.apk   20,883 bytes
+20:23:55         D:\Thirty_Code\Android\RUN\app\output\aligned-aligned-debugSigned.apk

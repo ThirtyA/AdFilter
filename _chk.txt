@@ -1,0 +1,3 @@
+APK size: 1515989 bytes
+entries: ['AndroidManifest.xml', 'resources.arsc', 'assets/blocklist.txt', 'classes.dex', 'META-INF/ANDROIDD.SF', 'META-INF/ANDROIDD.RSA', 'META-INF/MANIFEST.MF']
+dex: 23960

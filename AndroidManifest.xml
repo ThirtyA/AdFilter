@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lab.adfilter">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 开机自启 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!--
+      Android 11 (API 30) 起包可见性限制：不加 <queries> 就查不到其他已安装应用。
+      本 App 暂时用不到，但留着注释方便以后做「按应用排除」功能时参考。
+      （注意：当前架构下 DNS 请求由系统统一代发，tun 里拿不到原始 UID，
+        per-app 过滤原理上做不到，需要改造成劫持全流量才行。）
+    -->
+
+    <application
+        android:allowBackup="true"
+        android:label="广告过滤"
+        android:theme="@android:style/Theme.Material.Light">
+
+        <!--
+          excludeFromRecents：让这个 App 的任务不出现在「最近任务」列表里，
+          也就是用户说的"后台什么都没有"。注意它只影响 App 自己的任务，
+          过滤服务照常在运行，只是不再多占一格后台卡片。
+
+          这里的 category 用 INFO 而不是 LAUNCHER —— INFO 不会在桌面生成图标，
+          但「设置 → 应用信息」页面会认它，于是那里始终保留一个「打开」按钮。
+          这是隐藏桌面图标之后唯一的安全后路，务必保留。
+        -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:label="广告过滤"
+            android:excludeFromRecents="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.INFO" />
+            </intent-filter>
+        </activity>
+
+        <!--
+          桌面图标实际上是这个别名提供的。
+          MainActivity 自己不带 LAUNCHER，所以在界面里可以动态开关这个别名
+          来决定要不要显示桌面图标（PackageManager.setComponentEnabledSetting）。
+
+          为什么不直接把 LAUNCHER 写在 MainActivity 上：那样就没法"启用/禁用"了 ——
+          禁用 MainActivity 本身会把整个界面组件干掉，通知点回来也进不去。
+        -->
+        <activity-alias
+            android:name=".LauncherAlias"
+            android:targetActivity=".MainActivity"
+            android:label="广告过滤"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- 白名单 / 防误杀管理界面 -->
+        <activity
+            android:name=".AllowActivity"
+            android:exported="false"
+            android:label="白名单"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true" />
+
+        <!--
+          BIND_VPN_SERVICE 权限 + android.net.VpnService 的 intent-filter
+          是系统识别 VPN 服务的硬性要求，缺一不可。
+        -->
+        <service
+            android:name=".AdFilterVpnService"
+            android:exported="true"
+            android:permission="android.permission.BIND_VPN_SERVICE">
+            <intent-filter>
+                <action android:name="android.net.VpnService" />
+            </intent-filter>
+        </service>
+
+        <!--
+          下拉状态栏快捷开关磁贴。
+          这是第三方 App 能做到的、最接近"集成进系统"的形态：
+          用户在快捷设置面板里把「广告过滤」拖到常用区，之后一点即开。
+          BIND_QUICK_SETTINGS_TILE + QS_TILE action 缺一不可；
+          android:icon 也必须给，否则某些系统会直接不显示这块瓦片。
+        -->
+        <service
+            android:name=".AdFilterTileService"
+            android:exported="true"
+            android:label="广告过滤"
+            android:icon="@android:drawable/ic_menu_view"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE" />
+            </intent-filter>
+        </service>
+
+        <!-- 开机自启 + 自身升级后恢复 -->
+        <receiver
+            android:name=".BootReceiver"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
+            </intent-filter>
+        </receiver>
+
+    </application>
+
+</manifest>

@@ -1,0 +1,13 @@
+﻿
+package: name='com.lab.adfilter' versionCode='' versionName='' platformBuildVer
+sionName='15' platformBuildVersionCode='35' compileSdkVersion='35' compileSdkVe
+rsionCodename='15'
+uses-permission: name='android.permission.INTERNET'
+uses-permission: name='android.permission.FOREGROUND_SERVICE'
+uses-permission: name='android.permission.POST_NOTIFICATIONS'
+uses-permission: name='android.permission.RECEIVE_BOOT_COMPLETED'
+launchable-activity: name='com.lab.adfilter.MainActivity'  label='' icon=''
+other-receivers
+other-services
+
+

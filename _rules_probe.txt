@@ -1,0 +1,4 @@
+﻿[OK ] adguard_cn  status=200  6KB
+[OK ] adguard_dns  status=200  4269KB
+[OK ] easylist_cn  status=200  533KB
+[OK ] adaway_hosts  status=200  238KB

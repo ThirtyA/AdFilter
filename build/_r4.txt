@@ -1,0 +1,7 @@
+﻿
+12:09:04      -> classes.dex  44712 bytes
+12:09:04      宸插啓鍏?classes.dex -> 1518514 bytes
+12:09:07        | Successfully processed 1 APKs and 0 errors in 0.57 seconds.
+12:09:07    [OK] aligned-aligned-debugSigned.apk   1,528,277 bytes
+
+

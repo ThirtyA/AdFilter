@@ -1,0 +1,67 @@
+12:08:56  ======================================================================
+12:08:56  1/6  aapt2 编译资源
+12:08:56  ======================================================================
+12:08:57      $ D:\Thirty_Code\Android\RUN\toolchain\android-sdk\build-tools\34.0.0\aapt2.exe compile --dir D:\Thirty_Code\Android\RUN\app\res -o D:\Thirty_Code\Android\RUN\app
+12:08:57  
+12:08:57  ======================================================================
+12:08:57  2/6  aapt2 链接（生成 APK 骨架 + resources.arsc）
+12:08:57  ======================================================================
+12:08:58      打包 assets: D:\Thirty_Code\Android\RUN\app\assets
+12:08:58      $ D:\Thirty_Code\Android\RUN\toolchain\android-sdk\build-tools\34.0.0\aapt2.exe link -I D:\Thirty_Code\Android\RUN\toolchain\android-sdk\platforms\android-35\andr
+12:08:59  
+12:08:59  ======================================================================
+12:08:59  3/6  javac 编译 Java 源码
+12:08:59  ======================================================================
+12:08:59      源文件: ['AdFilterTileService.java', 'AdFilterVpnService.java', 'AllowActivity.java', 'AllowList.java', 'AppSettings.java', 'BlockList.java', 'BootReceiver.java', 'MainActivity.java']
+12:08:59      $ javac -encoding UTF-8 -source 11 -target 11 -classpath D:\Thirty_Code\Android\RUN\toolchain\android-sdk\platforms\android-35\android.jar -d D:\Thirty_Code\Andro
+12:09:01        ! ����: [options] δ�� -source 11 һ������ϵͳģ��·��
+12:09:01        ! ע: ĳЩ�����ļ�ʹ�û򸲸����ѹ�ʱ�� API��
+12:09:01        ! ע: �й���ϸ��Ϣ, ��ʹ�� -Xlint:deprecation ���±��롣
+12:09:01        ! 1 ������
+12:09:01  
+12:09:01  ======================================================================
+12:09:01  4/6  d8 转换为 DEX
+12:09:01  ======================================================================
+12:09:02      $ java -cp D:\Thirty_Code\Android\RUN\toolchain\android-sdk\build-tools\34.0.0\lib\d8.jar com.android.tools.r8.D8 --lib D:\Thirty_Code\Android\RUN\toolchain\andro
+12:09:04      -> classes.dex  44712 bytes
+12:09:04  
+12:09:04  ======================================================================
+12:09:04  5/6  打包 + 对齐
+12:09:04  ======================================================================
+12:09:04      已写入 classes.dex -> 1518514 bytes
+12:09:04      $ D:\Thirty_Code\Android\RUN\toolchain\android-sdk\build-tools\34.0.0\zipalign.exe -p 4 D:\Thirty_Code\Android\RUN\app\build\unsigned.apk D:\Thirty_Code\Android\R
+12:09:04  
+12:09:04  ======================================================================
+12:09:04  6/6  签名
+12:09:04  ======================================================================
+12:09:05      $ java -jar D:\Thirty_Code\Android\RUN\toolchain\bin\uber-apk-signer.jar -a D:\Thirty_Code\Android\RUN\app\build\aligned.apk -o D:\Thirty_Code\Android\RUN\app\out
+12:09:07        | source:
+12:09:07        | D:\Thirty_Code\Android\RUN\app\build
+12:09:07        | binary-lib/windows-33_0_2/libwinpthread-1.dll
+12:09:07        | C:\Users\a1259\AppData\Local\Temp\uapksigner-3934611124787901564
+12:09:07        | zipalign location: BUILT_IN
+12:09:07        | C:\Users\a1259\AppData\Local\Temp\uapksigner-3934611124787901564\win-zipalign_33_0_2.exe8470358635897805103.tmp
+12:09:07        | keystore:
+12:09:07        | [0] 161a0018 C:\Users\a1259\AppData\Local\Temp\temp_11443899075844024610_debug.keystore (DEBUG_EMBEDDED)
+12:09:07        | 01. aligned.apk
+12:09:07        | SIGN
+12:09:07        | file: D:\Thirty_Code\Android\RUN\app\build\aligned.apk (1.45 MiB)
+12:09:07        | checksum: a660671552c038a2cc6dc7bfe6e9f6a1f671e2b5a557d047225319e9cf7ed0ec (sha256)
+12:09:07        | - zipalign success
+12:09:07        | - sign success
+12:09:07        | VERIFY
+12:09:07        | file: D:\Thirty_Code\Android\RUN\app\output\aligned-aligned-debugSigned.apk (1.46 MiB)
+12:09:07        | checksum: 613e0da74f4e9a329f36bf8373d1fb589229cf4ef379cc400ce57cec8c852305 (sha256)
+12:09:07        | - zipalign verified
+12:09:07        | - signature verified [v2, v3]
+12:09:07        | Subject: CN=Android Debug, OU=Android, O=US, L=US, ST=US, C=US
+12:09:07        | SHA256: 1e08a903aef9c3a721510b64ec764d01d3d094eb954161b62544ea8f187b5953 / SHA256withRSA
+12:09:07        | Expires: Fri Mar 11 04:10:05 CST 2044
+12:09:07        | [Fri Sep 18 12:09:07 CST 2026][v1.3.0]
+12:09:07        | Successfully processed 1 APKs and 0 errors in 0.57 seconds.
+12:09:07  
+12:09:07  ======================================================================
+12:09:07  结果
+12:09:07  ======================================================================
+12:09:07    [OK] aligned-aligned-debugSigned.apk   1,528,277 bytes
+12:09:07         D:\Thirty_Code\Android\RUN\app\output\aligned-aligned-debugSigned.apk
